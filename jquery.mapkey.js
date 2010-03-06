@@ -32,9 +32,6 @@ Enjoy!
       code = key;
     }
     $.fn.mapKey.bindings[code.toString()] = newfunc;
-    
-    $(document).bind("keyup", $.fn.mapKey.kpress);
-    $(document).bind("keydown", $.fn.mapKey.kdown);
   }
   $.fn.mapKey = function(key, options) {
     //debug(this);
@@ -46,9 +43,6 @@ Enjoy!
       // build element specific options
       var o = $.meta ? $.extend({}, opts, $this.data()) : opts;
       var t = "";
-      //start doing stuff
-      $(document).bind("keyup", $.fn.mapKey.kpress);
-      $(document).bind("keydown", $.fn.mapKey.kdown);
       
       if($this.is("a")){
         var code;
@@ -206,4 +200,8 @@ Enjoy!
     "]": 221,
     "singlequote": 222
   };
+  
+  //bind event listeners
+  $(document).bind("keyup", $.fn.mapKey.kpress);
+  $(document).bind("keydown", $.fn.mapKey.kdown);
 })(jQuery);
