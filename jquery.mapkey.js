@@ -154,7 +154,7 @@ Enjoy!
     "multiply": 106,
     "add": 107,
     "subtract": 109,
-    "decimal point": 110,
+    "decimalpt": 110,
     "divide":  111,
     "f1": 112,
     "f2": 113,
