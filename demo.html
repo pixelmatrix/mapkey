@@ -10,6 +10,9 @@
 	<script src="jquery.mapkey.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 	  $(function(){
+	    $("a").mapKey("right", { trigger: 'custom_event' })
+	          .bind('custom_event', function() { alert("triggered custom_event"); });
+	    
 	    $("a").mapKey("left");
 	    $.mapKey("a", function(){
 	      $("a").attr("href", "http://joshpyles.com").mapKey("left");

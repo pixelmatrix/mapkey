@@ -39,19 +39,22 @@ Enjoy!
     var opts = $.extend({}, $.fn.mapKey.defaults, options);
     // iterate and setup each matched element
     return this.each(function() {
-      $this = $(this);
+      var $this = $(this);
       // build element specific options
       var o = $.meta ? $.extend({}, opts, $this.data()) : opts;
       var t = "";
       
-      if($this.is("a")){
-        var code;
-        if(typeof key == "string"){
-          code = $.fn.mapKey.keys[key]; 
-        }else if(typeof key == "integer"){
-          code = key;
-        }
-        $.fn.mapKey.bindings[code.toString()] = $this.attr("href");
+      var code;
+      if(typeof key == "string"){
+        code = $.fn.mapKey.keys[key]; 
+      }else if(typeof key == "integer"){
+        code = key;
+      }
+      
+      if (o.trigger) {
+        $.fn.mapKey.bindings[code.toString()] = function() { $this.trigger(o.trigger); };
+      } else if($this.is("a[href]")){
+        $.fn.mapKey.bindings[code.toString()] = function() { window.location = $this.attr("href") };
       }
     });
   };
