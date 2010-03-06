@@ -70,18 +70,16 @@ Enjoy!
     //figure out the code of the key pressed
     var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
     
-    //iterate through all the bindings to see if we pressed an assigned key
-    $.each($.fn.mapKey.bindings, function(index, value){
-      if(key == index){
-        if(typeof value == "string"){
-          //lets navigate to the href
-          window.location = value;
-        }else if(typeof value == "function"){
-          //it's a function. let's execute it!
-          value();
-        }
+    var value = $.fn.mapKey.bindings[key];
+    if (value) {
+      if(typeof value == "string"){
+        //lets navigate to the href
+        window.location = value;
+      }else if(typeof value == "function"){
+        //it's a function. let's execute it!
+        value();
       }
-    });
+    }
     
     e.preventDefault();
   }
