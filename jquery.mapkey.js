@@ -32,6 +32,9 @@ Enjoy!
       code = key;
     }
     $.fn.mapKey.bindings[code.toString()] = newfunc;
+    
+    $(document).bind("keyup", $.fn.mapKey.kpress);
+    $(document).bind("keydown", $.fn.mapKey.kdown);
   }
   $.fn.mapKey = function(key, options) {
     //debug(this);
@@ -45,6 +48,7 @@ Enjoy!
       var t = "";
       //start doing stuff
       $(document).bind("keyup", $.fn.mapKey.kpress);
+      $(document).bind("keydown", $.fn.mapKey.kdown);
       
       if($this.is("a")){
         var code;
@@ -60,6 +64,14 @@ Enjoy!
   //
   // define and expose our functions
   //
+  $.fn.mapKey.kdown = function(e){
+    //figure out the code of the key pressed
+    var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
+    
+    if($.fn.mapKey.bindings[key] != undefined){
+      e.preventDefault();
+    }
+  }
   $.fn.mapKey.kpress = function(e){
     //figure out the code of the key pressed
     var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
