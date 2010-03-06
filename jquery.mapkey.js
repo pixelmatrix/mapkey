@@ -1,6 +1,6 @@
 /*
 
-Map Key v0.5
+Map Key v0.6
 Copyright © 2010 Josh Pyles / Pixelmatrix Design LLC
 http://pixelmatrixdesign.com
 
@@ -13,6 +13,8 @@ Usage:
 
 $("a#left").mapKey("left");
 
+$("a#left").mapKey(37); (use keycodes too!)
+
 $.mapKey("left", function(){
   alert("you hit the left arrow!");
 });
@@ -23,7 +25,12 @@ Enjoy!
 
 (function($) {
   $.mapKey = function(key, newfunc){
-    var code = $.fn.mapKey.keys[key];
+    var code;
+    if(typeof key == "string"){
+      code = $.fn.mapKey.keys[key];
+    }else if(typeof key == "integer"){
+      code = key;
+    }
     $.fn.mapKey.bindings[code.toString()] = newfunc;
   }
   $.fn.mapKey = function(key, options) {
@@ -40,7 +47,12 @@ Enjoy!
       $(document).bind("keyup", $.fn.mapKey.kpress);
       
       if($this.is("a")){
-        var code = $.fn.mapKey.keys[key];
+        var code;
+        if(typeof key == "string"){
+          code = $.fn.mapKey.keys[key]; 
+        }else if(typeof key == "integer"){
+          code = key;
+        }
         $.fn.mapKey.bindings[code.toString()] = $this.attr("href");
       }
     });
