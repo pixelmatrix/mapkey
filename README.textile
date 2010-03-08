@@ -14,8 +14,12 @@ Fire a simple function when the down arrow key is pressed
   $(".hiddendiv").slideDown();
 });@
 
+Fire a jQuery trigger when a key is pressed
+@$("div").mapKey("down", {trigger: facebox.show});@
+
 h2. Key shortcuts
 
+* You can use the keycodes if you want, but here are some helpful shortcut strings i've made:
 * All of the letter keys are available in their lowercase form (a-z)
 * Any of the numbers are available as themselves (0-9)
 * F1-F12 are lowercase: f1, f2, f3, etc
@@ -63,3 +67,7 @@ h2. Key shortcuts
 * Close Bracket: "]"
 * Backslash (\): "backslash"
 * Single Quote ('): "singlequote"
+
+h2. More advanced stuff
+
+This plugin is meant to be a very light one. If you need to do more advanced things, I suggest trying jeresig's plugin "jQuery.hotkeys":http://github.com/jeresig/jquery.hotkeys. That can handle things like key combinations and more.
