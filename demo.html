@@ -1,45 +1,59 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<title>mapKey Test</title>
-	<script src="http://code.jquery.com/jquery.js" type="text/javascript" charset="utf-8"></script>
-	<script src="jquery.mapkey.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" charset="utf-8">
-	  var cur = 0;
-	  $(function(){
-	    $.mapKey("down", nextItem);
-	    $.mapKey("up", prevItem);
-	    $.mapKey("1", function(){
-	      setItem(1);
-	    });
-	    $.mapKey("2", function(){
-	      setItem(2);
-	    });
-	    $.mapKey("3", function(){
-	      setItem(3);
-	    });
-	    $.mapKey("4", function(){
-	      setItem(4);
-	    });
-	    $.mapKey("5", function(){
-	      setItem(5);
-	    });
-	    $.mapKey("6", function(){
-	      setItem(6);
-	    });
-	    $.mapKey("7", function(){
-	      setItem(7);
-	    });
-	  });
-	  function setItem(num){
-	    cur = num-1;
-	    updateItems();
-	  }
-	  function nextItem(){
+  <title>mapKey Test</title>
+  <script src="http://code.jquery.com/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="jquery.mapkey.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" charset="utf-8">
+    var cur = 0;
+    $(function(){
+      $.mapKey("down", nextItem, {direction: "down"});
+      $.mapKey("up", prevItem, {direction: "down"});
+      $.mapKey("1", function(){
+        setItem(1);
+      });
+      $.mapKey("2", function(){
+        setItem(2);
+      });
+      $.mapKey("3", function(){
+        setItem(3);
+      });
+      $.mapKey("4", function(){
+        setItem(4);
+      });
+      $.mapKey("5", function(){
+        setItem(5);
+      });
+      $.mapKey("6", function(){
+        setItem(6);
+      });
+      $.mapKey("7", function(){
+        setItem(7);
+      });
+      $.mapKey("d", toggleDisable);
+      $("a#disable-link").click(function(){
+        toggleDisable();
+        return false;
+      });
+    });
+    function toggleDisable(){
+      if($.fn.mapKey.enabled == true){
+        $.fn.mapKey.disable();
+        $("span#status").text("disabled");
+      }else{
+        $.fn.mapKey.enable();
+        $("span#status").text("enabled");
+      }
+    }
+    function setItem(num){
+      cur = num-1;
+      updateItems();
+    }
+    function nextItem(){
       if(cur < ($("li").length-1)){
         cur++;
       }else{
@@ -59,55 +73,56 @@
       $("li.selected").removeClass("selected");
       $("li:eq("+cur+")").addClass("selected");
     }
-	</script>
-	<style>
-	  body {
-	    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	    color: #666;
-	    padding: 30px;
-	  }
-	  h1 {
-	    color: #444;
-	  }
-	  ul {
-	    list-style: none;
-	    padding: 0;
-	    margin: 0;
-	    float: left;
-	    margin-bottom: 30px;
-	  }
-	  a {
-	    font-weight: bold;
-	    text-decoration: none;
-	    color: #0463c4;
-	  }
-	  li {
-	    padding: 2px 10px;
-	    width: 100px;
-	    -webkit-border-radius: 3px;
-	    -moz-border-radius: 3px;
-	    border-radius: 3px;
-	    font-size: 0.8em;
-	  }
-	  li a {
-	    font-size: 1.1em;
-	    letter-spacing: 1px;
-	    text-transform: uppercase;
-	  }
-	  li.selected {
-	    background-color: #0463c4;
-	    color: rgba(255,255,255,0.5);
-	  }
-	  li.selected a {
-	    color: #fff;
-	    text-shadow: rgba(0,0,0,0.4) 0px -1px 0px;
-	  }
-	</style>
+  </script>
+  <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #666;
+      padding: 30px;
+    }
+    h1 {
+      color: #444;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      float: left;
+      margin-bottom: 30px;
+    }
+    a {
+      font-weight: bold;
+      text-decoration: none;
+      color: #0463c4;
+    }
+    li {
+      padding: 2px 10px;
+      width: 100px;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      font-size: 0.8em;
+    }
+    li a {
+      font-size: 1.1em;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    li.selected {
+      background-color: #0463c4;
+      color: rgba(255,255,255,0.5);
+    }
+    li.selected a {
+      color: #fff;
+      text-shadow: rgba(0,0,0,0.4) 0px -1px 0px;
+    }
+  </style>
 </head>
 
 <body>
   <h1>Testing mapKey</h1>
   <p>Navigate with &uarr; &amp; &darr; (arrow keys) or by pressing the cooresponding number.</p>
+  <p><a id="disable-link" href="#">toggle keyboard navigation</a> (or press d): <span id="status">enabled</span></p>
   <ul>
     <li class="selected"><a href="#">Item 1</a> (1)</li>
     <li><a href="#">Item 2</a> (2)</li>
@@ -118,6 +133,7 @@
     <li><a href="#">Item 7</a> (7)</li>
   </ul>
   <br clear="all"/>
+  <input type="text" placeholder="try to type mapped keys"/>
   <p><a href="http://github.com/pixelmatrix/mapkey">View on Github &raquo;</a></p>
 </body>
 </html>

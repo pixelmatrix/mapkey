@@ -1,7 +1,7 @@
 h1. mapKey
 
 a plugin for jQuery
-*created by:* Josh Pyles
+*created by:* Josh Pyles / "Pixelmatrix Design":http://pixelmatrixdesign.com
 *license:* "MIT License":http://www.opensource.org/licenses/mit-license.php
 
 h2. Usage
@@ -21,9 +21,10 @@ h2. Key shortcuts
 
 * You can use the keycodes if you want, but here are some helpful shortcut strings i've made:
 * All of the letter keys are available in their lowercase form (a-z)
-* Any of the numbers are available as themselves (0-9)
+* Any of the numbers are available as themselves (0-9). This syntax specifies numpad & regular numerals
 * F1-F12 are lowercase: f1, f2, f3, etc
 * Numpad numbers are available as num1, num2, num3, etc
+* Regular numbers are available as top1, top2, top3, etc
 * Arrow keys available as left, right, up, and down
 * Backspace: "back"
 * Tab: "tab"
@@ -41,8 +42,8 @@ h2. Key shortcuts
 * Home: "home"
 * Insert: "insert"
 * Delete: "del"
-* Windows key: "windows"
-* Command key: "cmd"
+* Windows key: "windows" (will target left or right windows buttons)
+* Command key: "cmd" (will target left or right command buttons) _same thing as windows key._
 * Left Windows key: "lwindows"
 * Right Windows key: "rwindwows"
 * Left Command key: "lcmd"
@@ -67,6 +68,18 @@ h2. Key shortcuts
 * Close Bracket: "]"
 * Backslash (\): "backslash"
 * Single Quote ('): "singlequote"
+
+h2. Enable / Disable
+
+There may be times when you want the entire keyboard to be available for typing (such as forms). It's simple to enable or disable mapKey. Simply call @$.fn.mapKey.disable();@ and @$.fn.mapKey.enable();@ to enable it once again.
+
+h2. Direction parameter
+
+You have the option to fire events on keydown or keyup. Default is keyup. keydown gets fired multiple times if you hold down the button. That can be useful if you're using the arrow keys. Set the option when you call mapKey:
+
+@$.mapKey("left", function(){
+  loadNextPage();
+}, {direction: "down"});@
 
 h2. More advanced stuff
 
