@@ -98,22 +98,24 @@ Enjoy!
       //figure out the code of the key pressed
       var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
       
-      //check the bindings for the current pressed key
-      var value = $.fn.mapKey.bindings.down[key];
-      
-      if (value) {
-        if(typeof value == "string"){
-          //lets navigate to the href
-          window.location = value;
-        }else if(typeof value == "function"){
-          //it's a function. let's execute it!
-          value();
+      if(!$(e.target).is("input, textarea, select")){
+        //check the bindings for the current pressed key
+        var value = $.fn.mapKey.bindings.down[key];
+
+        if (value) {
+          if(typeof value == "string"){
+            //lets navigate to the href
+            window.location = value;
+          }else if(typeof value == "function"){
+            //it's a function. let's execute it!
+            value();
+          }
+          e.preventDefault();
         }
-        e.preventDefault();
-      }
-      
-      if($.fn.mapKey.bindings.up[key] != undefined){
-        e.preventDefault();
+
+        if($.fn.mapKey.bindings.up[key] != undefined){
+          e.preventDefault();
+        }
       }
     }
   }
@@ -122,21 +124,23 @@ Enjoy!
     if($.fn.mapKey.enabled){  
       //figure out the code of the key pressed
       
-      var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
-      
-      //check the bindings for the current pressed key
-      var value = $.fn.mapKey.bindings.up[key];
-      
-      if (value) {
-        if(typeof value == "string"){
-          //lets navigate to the href
-          window.location = value;
-        }else if(typeof value == "function"){
-          //it's a function. let's execute it!
-          value();
+      if(!$(e.target).is("input, textarea, select")){ //check if you are in an input
+        var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
+
+        //check the bindings for the current pressed key
+        var value = $.fn.mapKey.bindings.up[key];
+
+        if (value) {
+          if(typeof value == "string"){
+            //lets navigate to the href
+            window.location = value;
+          }else if(typeof value == "function"){
+            //it's a function. let's execute it!
+            value();
+          }
+          e.preventDefault();
         }
-        e.preventDefault();
-      } 
+      }
     }
   }
   $.fn.mapKey.enable = function(){
